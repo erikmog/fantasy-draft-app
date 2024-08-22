@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Fantasy Football Calculator ADP Data</h1>
+
+<form method="get" action="{{ url_for('adp_view') }}">
+    <label for="format">Scoring Format:</label>
+    <select name="format" id="format">
+        <option value="standard" {% if format == 'standard' %}selected{% endif %}>Standard</option>
+        <option value="ppr" {% if format == 'ppr' %}selected{% endif %}>PPR</option>
+        <option value="half-ppr" {% if format == 'half-ppr' %}selected{% endif %}>Half-PPR</option>
+    </select>
+
+    <label for="teams">Number of Teams:</label>
+    <input type="number" name="teams" id="teams" value="{{ teams }}" min="8" max="16">
+
+    <label for="year">Year:</label>
+    <input type="number" name="year" id="year" value="{{ year }}" min="2018" max="2024">
+
+    <label for="position">Position:</label>
+    <select name="position" id="position">
+        <option value="" {% if position == '' %}selected{% endif %}>All</option>
+        <option value="QB" {% if position == 'QB' %}selected{% endif %}>QB</option>
+        <option value="RB" {% if position == 'RB' %}selected{% endif %}>RB</option>
+        <option value="WR" {% if position == 'WR' %}selected{% endif %}>WR</option>
+        <option value="TE" {% if position == 'TE' %}selected{% endif %}>TE</option>
+        <option value="K" {% if position == 'K' %}selected{% endif %}>K</option>
+        <option value="DEF" {% if position == 'DEF' %}selected{% endif %}>DEF</option>
+    </select>
+
+    <button type="submit">Get ADP Data</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Player Name</th>
+            <th>Position</th>
+            <th>Team</th>
+            <th>ADP</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in players %}
+        <tr>
+            <td>{{ player['rank'] }}</td>
+            <td>{{ player['name'] }}</td>
+            <td>{{ player['position'] }}</td>
+            <td>{{ player['team'] }}</td>
+            <td>{{ player['adp'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p>ADP data provided by <a href="https://fantasyfootballcalculator.com/">Fantasy Football Calculator</a></p>
+{% endblock %}

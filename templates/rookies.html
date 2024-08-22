@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Rookie Details</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Player Name</th>
+            <th>Position</th>
+            <th>Team</th>
+            <th>Bye Week</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for rookie in rookies %}
+        <tr>
+            <td>{{ rookie.rank }}</td>
+            <td>{{ rookie.player_name }}</td>
+            <td>{{ rookie.position }}</td>
+            <td>{{ rookie.team }}</td>
+            <td>{{ rookie.bye_week }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Favorite Players</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Draft Position</th>
+            <th>Player Name</th>
+            <th>Team</th>
+            <th>Position</th>
+            <th>Round</th>
+            <th>Pick and Round</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in favorites %}
+        <tr>
+            <td>{{ player['Draft Position'] }}</td>
+            <td>{{ player['Player Name'] }}</td>
+            <td>{{ player['Player Team'] }}</td>
+            <td>{{ player['Position'] }}</td>
+            <td>{{ player['Round'] }}</td>
+            <td>{{ player['Pick and Round'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

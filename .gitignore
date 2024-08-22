@@ -1,0 +1,28 @@
+# Python
+*.pyc
+__pycache__/
+
+# Environment Variables
+.env
+
+# Virtual Environment
+venv/
+*.log
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Flask Cache
+instance/
+.cache/
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# Terraform Files
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup

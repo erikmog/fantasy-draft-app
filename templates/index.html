@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Player List</h1>
+<form method="get" action="{{ url_for('index') }}">
+    <label for="position">Position:</label>
+    <select name="position" id="position">
+        <option value="">All</option>
+        {% for pos in positions %}
+        <option value="{{ pos }}">{{ pos }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="round">Round:</label>
+    <select name="round" id="round">
+        <option value="">All</option>
+        {% for rnd in rounds %}
+        <option value="{{ rnd }}">{{ rnd }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Filter</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Draft Position</th>
+            <th>Player Name</th>
+            <th>Team</th>
+            <th>Position</th>
+            <th>Round</th>
+            <th>Pick and Round</th>
+            <th>FFC Rank</th> <!-- New FFC Rank Column -->
+            <th>Favorite</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for player in players %}
+        <tr class="{% if player['is_favorite'] %}favorite-highlight{% endif %}">
+            <td>{{ player['Draft Position'] }}</td>
+            <td>{{ player['Player Name'] }}</td>
+            <td>{{ player['Player Team'] }}</td>
+            <td>{{ player['Position'] }}</td>
+            <td>{{ player['Round'] }}</td>
+            <td>{{ player['Pick and Round'] }}</td>
+            <td>{{ player['FFC Rank'] if player['FFC Rank'] else 'N/A' }}</td> <!-- Display FFC Rank -->
+            <td>
+                <button class="favorite-btn" data-id="{{ loop.index0 }}">
+                    {% if player['is_favorite'] %}
+                        -
+                    {% else %}
+                        ⭐
+                    {% endif %}
+                </button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
